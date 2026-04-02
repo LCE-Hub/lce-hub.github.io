@@ -387,13 +387,14 @@ body {
 
 .get-launcher,
 .github-repo,
-.join-discord {
+.join-discord,
+.join-fluxer {
   justify-content: space-between;
   padding: 0 20px;
   height: 64px;
 }
 
-.join-discord {
+.join-discord, .join-fluxer {
   font-size: 1.8rem;
 }
 
