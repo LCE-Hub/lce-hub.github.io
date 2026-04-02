@@ -177,10 +177,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     if (os === 'Linux') {
       const archTag = arch === 'arm64' ? 'aarch64' : 'x86_64';
-      const specific = assets.find(a => a.name.endsWith('.AppImage') && a.name.includes(archTag));
+      const specific = assets.find(a => a.name.endsWith('.flatpak') && a.name.includes(archTag));
       if (specific) return specific;
 
-      return assets.find(a => a.name.endsWith('.AppImage'));
+      return assets.find(a => a.name.endsWith('.flatpak'));
     }
     return null;
   };
@@ -203,7 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
       filteredAssets = assets.filter(a => a.name.endsWith('.dmg'));
       title = `Emerald Legacy for macOS ${isNightly ? '(Nightly)' : ''}`;
     } else if (osType === 'Linux') {
-      filteredAssets = assets.filter(a => a.name.endsWith('.AppImage') || a.name.endsWith('.deb') || a.name.endsWith('.rpm'));
+      filteredAssets = assets.filter(a => a.name.endsWith('.flatpak') || a.name.endsWith('.deb') || a.name.endsWith('.rpm'));
       title = `Emerald Legacy for Linux ${isNightly ? '(Nightly)' : ''}`;
     }
 
