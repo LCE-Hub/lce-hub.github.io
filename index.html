@@ -3,11 +3,10 @@
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="icon" type="image/png" href="/assets/logo-6ZnFP0iu.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Emerald Legacy Launcher | Play Minecraft Legacy Edition</title>
-  <meta name="description"
-    content="The ultimate launcher for Minecraft Legacy Console Edition builds. Streamlined, themed, and built for the community.">
+  <title>Maintenance | LCE Emerald Launcher</title>
+  <meta name="description" content="We are currently down for maintenance. Please check back later.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,7 +14,13 @@
     href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Silkscreen:wght@400;700&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <script type="module" crossorigin src="/assets/index-90k8wNOq.js"></script>
+
+
+  <style>
+    .panorama-bg {
+      background-image: url('/assets/TU7_Panorama_Background_S-DcecwG0I.png') !important;
+    }
+  </style>
   <link rel="stylesheet" crossorigin href="/assets/index-B6xBYW09.css">
 </head>
 
@@ -27,336 +32,72 @@
 
     <div class="menu-container">
       <header class="menu-header">
-        <img src="MenuTitle.png" alt="Emerald Legacy" class="menu-title">
+        <img src="/assets/MenuTitle-DBKljo_v.png" alt="Emerald Launcher" class="menu-title">
         <button id="audio-toggle" class="audio-btn" title="Toggle Music">
           <i class="fas fa-volume-up"></i>
         </button>
       </header>
 
-      <nav class="menu-tabs">
-        <button class="arrow-btn" id="prev-tab">LB</button>
-
-        <div class="tabs-wrapper">
-          <button class="tab-item active" data-tab="home">Home</button>
-          <button class="tab-item" data-tab="features">Features</button>
-          <button class="tab-item" data-tab="media">Media</button>
-          <button class="tab-item" data-tab="download">Download</button>
-        </div>
-
-        <button class="arrow-btn" id="next-tab">RB</button>
-      </nav>
-
-      <div class="menu-content-wrapper">
+      <div class="menu-content-wrapper" style="margin-top: 40px;">
         <main class="menu-content">
-          <section class="tab-content active" id="home">
-            <div class="home-layout">
-              <div class="features-row">
-                <div class="feature-card">
-                  <div class="feature-image">
-                    <img src="logo.png" alt="Emerald" class="pixel-icon">
-                  </div>
-                  <div class="feature-info">
-                    <h3>Authentic UI</h3>
-                    <p>A launcher built to feel like an extension of the game itself.</p>
-                  </div>
+          <section class="tab-content active" id="maintenance"
+            style="display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 60px 20px; text-align: center;">
+            <img src="data:image/png;base64,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" alt="Emerald" class="pixel-icon"
+              style="width: 120px; height: 120px; margin-bottom: 30px;">
+            <h1
+              style="font-size: clamp(2rem, 8vw, 3.5rem); color: #fff; text-shadow: 4px 4px 0 #000; margin-bottom: 20px; font-family: var(--font-pixel);">
+              WE ARE CURRENTLY DOWN</h1>
+            <p
+              style="font-size: clamp(1rem, 4vw, 1.8rem); color: #fff; line-height: 1.4; max-width: 600px; margin-bottom: 40px;">
+              We're performing some maintenance to get everything just as it was, or even better.</p>
+            <p
+              style="font-size: clamp(1rem, 3vw, 1.5rem); color: #fff; line-height: 1.4; max-width: 600px; margin-bottom: 40px;">
+              Please check back shortly or join our Discord for updates.
+            </p>
+            <div class="action-buttons">
+              <a href="https://discord.gg/NPMp9JhGYH" class="main-btn join-discord" target="_blank"
+                style="width: 320px;">
+                <div class="btn-content">
+                  <span class="btn-title">Join Discord</span>
                 </div>
-                <div class="feature-card">
-                  <div class="feature-image">
-                    <img src="potion.png" alt="Potion" class="pixel-icon">
-                  </div>
-                  <div class="feature-info">
-                    <h3>Optimized Speed</h3>
-                    <p>Rapid launching and peak game performance.</p>
-                  </div>
-                </div>
-                <div class="feature-card">
-                  <div class="feature-image">
-                    <img src="controller.png" alt="Controller" class="pixel-icon">
-                  </div>
-                  <div class="feature-info">
-                    <h3>Classic Support</h3>
-                    <p>Tailored for the legacy console edition community.</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="cta-section">
-                <h2>Ready to Play?</h2>
-                <p>Join the Discord or download the launcher.</p>
-              </div>
-
-              <div class="bottom-actions">
-                <div class="branding-group">
-                  <img src="logo.png" alt="Emerald Legacy" class="pixel-logo">
-                  <div class="branding-text">
-                    <span class="brand-name">Emerald</span>
-                    <span class="brand-sub">Legacy</span>
-                  </div>
-                </div>
-
-                <div class="action-buttons">
-                  <a href="https://github.com/Emerald-Legacy-Launcher/Emerald-Legacy-Launcher/releases/latest"
-                    class="main-btn get-launcher" id="main-download-btn">
-                    <div class="btn-content">
-                      <span>Get Launcher</span>
-                    </div>
-                    <img src="logo.png" class="btn-icon">
-                  </a>
-                  <a href="https://github.com/Emerald-Legacy-Launcher/Emerald-Legacy-Launcher"
-                    class="main-btn github-repo" target="_blank">
-                    <div class="btn-content">
-                      <span class="btn-title">GitHub Repo</span>
-                    </div>
-                    <img src="github-icon.png" class="btn-icon-github">
-                  </a>
-                  <a href="https://discord.gg/RHGRUwpmVc" class="main-btn join-discord" target="_blank">
-                    <div class="btn-content">
-                      <span class="btn-title">Join Discord</span>
-                    </div>
-                    <img src="discord-icon.jpg" class="btn-icon-discord">
-                  </a>
-                  <a href="https://fluxer.gg/s9ySzCPb" class="main-btn join-fluxer" target="_blank">
-                    <div class="btn-content">
-                      <span class="btn-title">Join Fluxer</span>
-                    </div>
-                    <img src="fluxer.svg" class="btn-icon">
-                  </a>
-
-                </div>
-
-                <div class="screenshot-carousel">
-                  <div class="carousel-container">
-                    <div class="carousel-header">Community Screenshots</div>
-                    <div class="carousel-view">
-                      <button class="carousel-arrow left">L</button>
-                      <img src="Community/image.png" class="carousel-img">
-                      <button class="carousel-arrow right">R</button>
-                    </div>
-                    <div class="carousel-footer">See more in Discord</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <section class="tab-content" id="features">
-            <div class="features-layout scroll-content">
-              <div class="overview-section">
-                <div class="overview-box">
-                  <h2>Project Overview</h2>
-                  <p>Emerald Legacy started as a solo project to create a better way to play Legacy Console Edition. Our
-                    team brings together expertise from various preservation projects into one definitive hub.</p>
-                </div>
-                <div class="philosophy-box">
-                  <h2>Our Philosophy</h2>
-                  <p>Built on a modern Rust/Tauri stack, we deliver a high-performance, cross-platform experience that
-                    uses only ~15MB of RAM, leaving all resources for the game.</p>
-                </div>
-              </div>
-
-              <div class="core-features-grid">
-                <div class="grid-item">
-                  <div class="item-icon"><i class="fas fa-magic"></i></div>
-                  <div class="item-text">
-                    <h3>Easy Setup</h3>
-                    <p>Automated installation for TU19 and TU24, with more versions coming soon.</p>
-                  </div>
-                </div>
-                <div class="grid-item">
-                  <div class="item-icon"><i class="fab fa-rust"></i></div>
-                  <div class="item-text">
-                    <h3>Rust Backend</h3>
-                    <p>Memory-safe operations and game execution with minimal overhead.</p>
-                  </div>
-                </div>
-                <div class="grid-item">
-                  <div class="item-icon"><i class="fas fa-sliders"></i></div>
-                  <div class="item-text">
-                    <h3>Easy Config</h3>
-                    <p>Integrated settings to manage your username and game parameters directly.</p>
-                  </div>
-                </div>
-                <div class="grid-item">
-                  <div class="item-icon"><i class="fas fa-rocket"></i></div>
-                  <div class="item-text">
-                    <h3>Tauri Frontend</h3>
-                    <p>Lightweight UI and configuration management via modern webview.</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="content-footer">
-                <div class="roadmap-link">
-                  <a href="https://github.com/orgs/Emerald-Legacy-Launcher/projects/2">DEVELOPMENT ROADMAP &rarr;</a>
-                </div>
-                <div class="acknowledgments">
-                  <p>Developed by the Emerald Team. Original creators: 4J Studios & Mojang.</p>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <section class="tab-content" id="media">
-            <div class="features-layout scroll-content">
-              <div class="overview-box" style="text-align: center;">
-                <h2>Launcher Screenshots</h2>
-                <p>Experience the definitive way to launch and manage your legacy console editions.</p>
-              </div>
-
-              <div class="gallery-grid launcher-previews">
-                <div class="gallery-item large">
-                  <div class="gallery-frame">
-                    <img src="Launcher/home.png" alt="Launcher Home">
-                    <div class="frame-caption">Interface</div>
-                  </div>
-                </div>
-                <div class="gallery-item large">
-                  <div class="gallery-frame">
-                    <img src="Launcher/versions.png" alt="Version Selection">
-                    <div class="frame-caption">Versions</div>
-                  </div>
-                </div>
-                <div class="gallery-item large">
-                  <div class="gallery-frame">
-                    <img src="Launcher/settings.png" alt="Launcher Settings">
-                    <div class="frame-caption">Settings</div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="overview-box" style="text-align: center; margin-top: 40px;">
-                <h2>Community Gallery</h2>
-                <p>A collection of moments and creations shared by the Emerald Legacy community.</p>
-              </div>
-
-              <div class="gallery-grid">
-                <div class="gallery-item">
-                  <div class="gallery-frame">
-                    <img src="Community/image.png" alt="Community Shot">
-                  </div>
-                </div>
-                <div class="gallery-item">
-                  <div class="gallery-frame">
-                    <img src="Community/image2.png" alt="Community Shot">
-                  </div>
-                </div>
-                <div class="gallery-item">
-                  <div class="gallery-frame">
-                    <img src="Community/image3.png" alt="Community Shot">
-                  </div>
-                </div>
-                <div class="gallery-item">
-                  <div class="gallery-frame">
-                    <img src="Community/image4.png" alt="Community Shot">
-                  </div>
-                </div>
-                <div class="gallery-item">
-                  <div class="gallery-frame">
-                    <img src="Community/image5.png" alt="Community Shot">
-                  </div>
-                </div>
-                <div class="gallery-item">
-                  <div class="gallery-frame">
-                    <img src="Community/image6.png" alt="Community Shot">
-                  </div>
-                </div>
-              </div>
-
-              <div class="content-footer" style="background: #3c3c3c; padding: 20px; border: 4px solid #1a1a1a;">
-                <div class="disclaimer-text">
-                  <h3>Share Your Creations</h3>
-                  <p>Join our Discord to feature your screenshots and videos on our official website!</p>
-                </div>
-                <div class="roadmap-link">
-                  <a href="https://discord.gg/RHGRUwpmVc" class="main-btn"
-                    style="width: 180px; height: 44px; font-size: 1rem;">JOIN DISCORD</a>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <section class="tab-content" id="download">
-            <div class="features-layout">
-              <div class="overview-box" style="text-align: center;">
-                <h2>Get Emerald Legacy</h2>
-                <p>Select your operating system to view available installers and architectures.</p>
-              </div>
-
-              <div class="os-grid">
-                <div class="os-card">
-                  <div class="os-icon"><i class="fab fa-windows"></i></div>
-                  <h3>Windows</h3>
-                  <button class="main-btn os-btn" id="download-win">Select Version</button>
-                </div>
-                <div class="os-card">
-                  <div class="os-icon"><i class="fab fa-linux"></i></div>
-                  <h3>Linux</h3>
-                  <button class="main-btn os-btn" id="download-linux">Select Version</button>
-                </div>
-                <div class="os-card">
-                  <div class="os-icon"><i class="fab fa-apple"></i></div>
-                  <h3>macOS</h3>
-                  <button class="main-btn os-btn" id="download-macos">Select Version</button>
-                </div>
-              </div>
-
-              <div class="alpha-disclaimer" style="margin-top: auto; border-color: #7c7c7c;">
-                <div class="item-icon">⚠️</div>
-                <div class="disclaimer-text">
-                  <h3>Windows SmartScreen</h3>
-                  <p>Because the launcher is unsigned, Windows may show a warning. Click <strong>"More info"</strong>
-                    and then <strong>"Run anyway"</strong> to proceed safely.</p>
-                </div>
-              </div>
+                <img src="data:image/jpeg;base64,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" class="btn-icon-discord">
+              </a>
             </div>
           </section>
         </main>
 
         <footer class="menu-footer">
-          <div class="legends">
-            <div class="legend-item"><span class="legend-icon">A</span> Select</div>
-            <div class="legend-item"><span class="legend-icon">B</span> Back</div>
-          </div>
-          <div class="version-info">
-            <div class="version-dot"></div>
-            EMERALD LEGACY LAUNCHER &copy; 2026
+          <div class="version-info" style="width: 100%; justify-content: center;">
+            <div class="version-dot" style="background: #ff3f3f; box-shadow: 0 0 10px #ff3f3f;"></div>
+            LCE Team &copy; 2026
           </div>
         </footer>
       </div>
     </div>
   </div>
 
-  <div id="download-modal" class="modal-overlay">
-    <div class="modal-content">
-      <div class="modal-header">
-        <div class="header-left">
-          <h2 id="modal-title">Select Downloader</h2>
-          <div class="nightly-toggle-wrapper">
-            <label class="switch">
-              <input type="checkbox" id="nightly-toggle">
-              <span class="slider"></span>
-            </label>
-            <span class="toggle-label">Nightly</span>
-          </div>
-        </div>
-        <button id="close-modal" class="close-btn">X</button>
-      </div>
-      <div id="modal-options" class="modal-options-grid">
-        <!-- Dynamic download buttons will be inserted here -->
-      </div>
-      <div class="modal-footer">
-        <p>Choose the format that works best for your system.</p>
-      </div>
-    </div>
-  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const audioBtn = document.getElementById('audio-toggle');
+      let isMuted = localStorage.getItem('emerald-muted') === 'true';
 
-  <div id="image-modal" class="modal-overlay">
-    <div class="image-modal-content">
-      <button id="close-image-modal" class="close-btn expansion-close">X</button>
-      <img id="expanded-image" src="" alt="Expanded Preview">
-    </div>
-  </div>
+      const updateUI = () => {
+        if (audioBtn) {
+          audioBtn.classList.toggle('muted', isMuted);
+          const icon = audioBtn.querySelector('i');
+          if (icon) icon.className = isMuted ? 'fas fa-volume-mute' : 'fas fa-volume-up';
+        }
+      };
 
+      updateUI();
+
+      audioBtn?.addEventListener('click', () => {
+        isMuted = !isMuted;
+        localStorage.setItem('emerald-muted', isMuted);
+        updateUI();
+      });
+    });
+  </script>
 </body>
 
 </html>
