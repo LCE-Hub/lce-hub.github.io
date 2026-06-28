@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelector('.carousel-arrow.left')?.addEventListener('click', () => rotateScreenshot(-1, true));
   document.querySelector('.carousel-arrow.right')?.addEventListener('click', () => rotateScreenshot(1, true));
 
-  const repo = 'Emerald-Legacy-Launcher/Emerald-Legacy-Launcher';
+  const repo = 'LCE-Hub/LCE-Emerald-Launcher';
   const modal = document.getElementById('download-modal');
   const modalOptions = document.getElementById('modal-options');
   const modalTitle = document.getElementById('modal-title');
@@ -143,6 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let latestAssets: any[] = [];
   let nightlyAssets: any[] = [];
   let currentOSType = 'Windows';
+  let fetchStatus: 'loading' | 'success' | 'error' = 'loading';
 
   const detectOS = () => {
     const ua = window.navigator.userAgent.toLowerCase();
@@ -185,6 +186,36 @@ document.addEventListener('DOMContentLoaded', () => {
     return null;
   };
 
+  const getReadableAssetName = (name: string, osType: string) => {
+    const lowerName = name.toLowerCase();
+    if (osType === 'Windows') {
+      if (lowerName.endsWith('.exe')) return 'Windows Setup (.exe)';
+      if (lowerName.endsWith('.msi')) return 'Windows Installer (.msi)';
+    }
+    if (osType === 'macOS') {
+      if (lowerName.includes('aarch64') || lowerName.includes('arm64')) {
+        return 'macOS Apple Silicon';
+      }
+      return 'macOS Intel';
+    }
+    if (osType === 'Linux') {
+      if (lowerName.endsWith('.flatpak')) return 'Flatpak';
+      if (lowerName.endsWith('.deb')) return 'Debian/Ubuntu (.deb)';
+      if (lowerName.endsWith('.rpm')) return 'RedHat/Fedora (.rpm)';
+      if (lowerName.endsWith('.appimage')) return 'AppImage';
+    }
+    return name;
+  };
+
+  const formatBytes = (bytes: number) => {
+    if (!bytes || bytes === 0) return 'Size Unknown';
+    const k = 1024;
+    const dm = 1;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+  };
+
   const openDownloadModal = (osType: string) => {
     if (!modal || !modalOptions || !modalTitle) return;
     currentOSType = osType;
@@ -203,7 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
       filteredAssets = assets.filter(a => a.name.endsWith('.dmg'));
       title = `Emerald Legacy for macOS ${isNightly ? '(Nightly)' : ''}`;
     } else if (osType === 'Linux') {
-      filteredAssets = assets.filter(a => a.name.endsWith('.flatpak') || a.name.endsWith('.deb') || a.name.endsWith('.rpm'));
+      filteredAssets = assets.filter(a => a.name.endsWith('.flatpak') || a.name.endsWith('.deb') || a.name.endsWith('.rpm') || a.name.endsWith('.AppImage'));
       title = `Emerald Legacy for Linux ${isNightly ? '(Nightly)' : ''}`;
     }
 
@@ -211,17 +242,46 @@ document.addEventListener('DOMContentLoaded', () => {
     const recommended = getRecommendedAsset(osType, arch, filteredAssets);
 
     modalTitle.innerText = title;
-    modalOptions.innerHTML = filteredAssets.length > 0 ? filteredAssets.map(asset => {
-      const isRecommended = asset.name === recommended?.name;
-      return `
-        <div class="modal-btn-container">
-          <a href="${asset.browser_download_url}" class="main-btn" onclick="window.playAudioSFX('levelup.ogg')">
-            <span>${asset.name.split('_').pop()?.split('-').pop() || asset.name}</span>
-          </a>
-          ${isRecommended ? '<span class="splash-text">Recommended!</span>' : ''}
-        </div>
-      `;
-    }).join('') : `<div style="color: grey; font-size: 1.2rem; padding: 20px;">No builds found for this platform.</div>`;
+
+    if (filteredAssets.length > 0) {
+      modalOptions.innerHTML = filteredAssets.map(asset => {
+        const isRecommended = asset.name === recommended?.name;
+        const readableName = getReadableAssetName(asset.name, osType);
+        const readableSize = formatBytes(asset.size);
+        return `
+          <div class="modal-btn-container">
+            <a href="${asset.browser_download_url}" class="main-btn" onclick="window.playAudioSFX('levelup.ogg')">
+              <span>${readableName} <small style="opacity: 0.7; font-size: 0.8rem; margin-left: 8px;">(${readableSize})</small></span>
+            </a>
+            ${isRecommended ? '<span class="splash-text">Recommended!</span>' : ''}
+          </div>
+        `;
+      }).join('');
+    } else {
+      if (fetchStatus === 'loading') {
+        modalOptions.innerHTML = `<div style="color: #ccc; font-size: 1.2rem; padding: 20px; text-align: center;"><i class="fas fa-spinner fa-spin" style="margin-right: 8px;"></i>Loading download links...</div>`;
+      } else if (fetchStatus === 'error') {
+        modalOptions.innerHTML = `
+          <div style="color: #ff8888; font-size: 1.1rem; padding: 20px; text-align: center; font-family: var(--font-pixel);">
+            <p style="margin-bottom: 15px;">Failed to retrieve download links automatically.</p>
+            <a href="https://github.com/${repo}/releases" target="_blank" class="main-btn" style="display: inline-flex; justify-content: center; align-items: center; text-decoration: none; max-width: 320px; margin: 0 auto;">
+              VIEW RELEASES ON GITHUB
+            </a>
+          </div>
+        `;
+      } else {
+        if (isNightly) {
+          modalOptions.innerHTML = `
+            <div style="color: #ccc; font-size: 1.1rem; padding: 20px; text-align: center;">
+              <p>No nightly builds are currently available.</p>
+              <p style="font-size: 0.9rem; margin-top: 10px; opacity: 0.8;">Please toggle Nightly off to download stable versions.</p>
+            </div>
+          `;
+        } else {
+          modalOptions.innerHTML = `<div style="color: #ccc; font-size: 1.2rem; padding: 20px; text-align: center;">No builds found for this platform.</div>`;
+        }
+      }
+    }
 
     modal.classList.add('active');
   };
@@ -235,44 +295,51 @@ document.addEventListener('DOMContentLoaded', () => {
   (window as any).playAudioSFX = (file: string) => audio.playSFX(file);
 
   const updateDownloadButtons = async () => {
+    fetchStatus = 'loading';
     try {
-      const [latestRes, nightlyRes] = await Promise.all([
+      const [latestRes, nightlyRes] = await Promise.allSettled([
         fetch(`https://api.github.com/repos/${repo}/releases/latest`),
         fetch(`https://api.github.com/repos/${repo}/releases/tags/nightly`)
       ]);
 
-      const [latestData, nightlyData] = await Promise.all([
-        latestRes.json(),
-        nightlyRes.json()
-      ]);
-
-      latestAssets = latestData.assets || [];
-      nightlyAssets = nightlyData.assets || [];
-
-      const { os } = detectOS();
-
-      const mainBtn = document.getElementById('main-download-btn');
-      if (mainBtn) {
-        mainBtn.addEventListener('click', (e) => {
-          e.preventDefault();
-          openDownloadModal(os === 'Unknown' ? 'Windows' : os);
-        });
-        const span = mainBtn.querySelector('span');
-        if (span) span.innerText = `Download for ${os === 'Unknown' ? 'Your OS' : os}`;
+      if (latestRes.status === 'fulfilled' && latestRes.value.ok) {
+        const latestData = await latestRes.value.json();
+        latestAssets = latestData.assets || [];
+        fetchStatus = 'success';
+      } else {
+        fetchStatus = 'error';
       }
 
-      const winBtn = document.getElementById('download-win');
-      const linuxBtn = document.getElementById('download-linux');
-      const macBtn = document.getElementById('download-macos');
-
-      winBtn?.addEventListener('click', (e) => { e.preventDefault(); openDownloadModal('Windows'); });
-      linuxBtn?.addEventListener('click', (e) => { e.preventDefault(); openDownloadModal('Linux'); });
-      macBtn?.addEventListener('click', (e) => { e.preventDefault(); openDownloadModal('macOS'); });
-
+      if (nightlyRes.status === 'fulfilled' && nightlyRes.value.ok) {
+        const nightlyData = await nightlyRes.value.json();
+        nightlyAssets = nightlyData.assets || [];
+      } else {
+        nightlyAssets = [];
+      }
     } catch (error) {
       console.error('Error fetching releases:', error);
+      fetchStatus = 'error';
     }
   };
+
+  const winBtn = document.getElementById('download-win');
+  const linuxBtn = document.getElementById('download-linux');
+  const macBtn = document.getElementById('download-macos');
+
+  winBtn?.addEventListener('click', (e) => { e.preventDefault(); openDownloadModal('Windows'); });
+  linuxBtn?.addEventListener('click', (e) => { e.preventDefault(); openDownloadModal('Linux'); });
+  macBtn?.addEventListener('click', (e) => { e.preventDefault(); openDownloadModal('macOS'); });
+
+  const { os } = detectOS();
+  const mainBtn = document.getElementById('main-download-btn');
+  if (mainBtn) {
+    mainBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openDownloadModal(os === 'Unknown' ? 'Windows' : os);
+    });
+    const span = mainBtn.querySelector('span');
+    if (span) span.innerText = `Download for ${os === 'Unknown' ? 'Your OS' : os}`;
+  }
 
   closeModal?.addEventListener('click', () => {
     audio.playSFX('back.ogg');
